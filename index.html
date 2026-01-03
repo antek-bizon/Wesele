@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleksandra & Antoni - Zaproszenie</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="flower-decor top-right"></div>
+    <div class="flower-decor bottom-left"></div>
+
+    <div id="passwordProtected" class="password-protected">
+        <form class="password-form" action="./">
+            <h2>Weryfikacja</h2>
+            <p>Prosimy podać datę ślubu:</p>
+            <input type="date" required class="date-input" name="pass">
+            <button type="submit" class="submit-btn">Wejdź</button>
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </form>
+    </div>
+    <main id="mainContent" class="main-content">
+        <p><q>Tak więc trwają wiara, nadzieja, miłość – te trzy: z nich zaś największa jest miłość.</q> – (1
+            Kor 13,13)</p>
+
+        <h1>Aleksandra & Antoni</h1>
+
+        <p class="invitation-text">Mają zaszczyt zaprosić na uroczystość zaślubin,<br> która odbędzie się</p>
+        <p id="ceremonyDate"></p>
+        <p>o godzinie <span id="ceremonyTime"></span></p>
+        <p>w kościele <span id="churchLocation"></span></p>
+        <p>
+            Po ceremonii zapraszamy na przyjęcie weselne, <br>
+            które odbędzie się w <span id="receptionLocation"></span>
+        </p>
+
+        <p style="margin-top: 60px; font-size: 0.9rem;">
+            Uprzejmie prosimy o potwierdzenie przybycia do dnia <span id="confirmDate">...</span>
+        </p>
+
+        <div class="contact-grid">
+            <div>
+                <div class="contact-label">Aleksandra</div>
+                <div id="contact1">...</div>
+            </div>
+            <div>
+                <div class="contact-label">Antoni</div>
+                <div id="contact2">...</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const SALT = 'dsfnaosdnfoansodfo'
+        const IV = new Int8Array([12, 23, 85, 49, 20, 1, 39, 52, 12, 32, 95, 100])
+        const ENCRYPTED_DATA = new Int8Array(atob(
+            "LTQ3LDMxLC03MiwtNjIsLTQ3LC0zOCwxMCw5Myw1MCwxMjcsLTEwNiwtOTcsNzIsNTUsLTEwMyw3MSwxMjYsLTE0LC0xMDEsLTg3LDc0LC03MCwtMTIwLDU5LDEwMSwtMTAzLC05MywtMjEsMSwtMjIsLTU1LC02NCwtMzcsLTEyNiwtNDAsNzUsLTEyNSwtMjYsLTU5LDk2LDQ4LDQ3LDE4LC03OCw2MSwtNjIsOCw0NSw4OSw4MSwtNSw3NSwtODQsMjMsOTUsLTEsLTI3LC0xMDUsLTg4LDEzLC0yNiwtNzEsLTMzLDEwMyw3OCwtNzIsMTEwLDUsMTIzLC0xNSwtNjEsMTE5LC00MiwtNTksLTEyMywtMzYsNzYsLTEwNSwtOCw1NSwtNjUsLTEyNCwtNDEsODAsODAsNTYsLTY4LC0yMiwtNDcsLTEwMSwtMzIsLTI5LDc3LDQ0LDUyLC03OCw0OSwtMTA3LC0xMTksLTc1LC00NSwtOTYsLTEwMSw1OSw3Nyw1NSwxMTUsLTU2LDEwMywtNTUsLTE0LDI4LDEyMiwtMTA5LDgzLDEwMCwtNiw3NSwxMDMsLTIwLC01MiwtMzMsLTExOCwtMjEsMjQsNjMsLTIxLDE0LDg1LDUzLDU3LDMzLC0zNyw4NiwxMjAsMTIyLC0xMjQsNDMsLTEwMyw5OCw5NCw1NCwxMjMsNzcsLTEwNCwtNTYsLTEwMSwtNzUsLTQ4LDYyLDUsLTM1LC0xMTUsLTEyMiw4NSwyMCw3MSwxMDgsLTEyMCw4NSwtOCwtMTksLTEyLC0xOCwxMjcsOTEsLTczLDMsLTExNSwxMTksLTY1LDY4LDU2LC0xMTQsNjgsMzEsLTgsLTExNywtMTgsLTksMTAxLC0xNSwyMSwyMiwtMjIsLTUsMzUsLTU0LC0yMiwtNTEsLTEyMiwtMiw2MCwxMTEsNjgsLTEyMCwxMjcsLTgxLDQ0LDUzLDc3LC03NCw2MiwxMjMsMTUsNTYsLTExMiwtMTYsLTE1LDIxLDExNSwtNiwtODMsLTc5LC0xMiwtNTQsMjMsMTA0LC0yNSwtNTQsLTU3LDQ5LC0xMjgsLTk2LC0xMDMsNTcsODYsODQsMTUsLTQsLTEsLTE3LDcyLDU4LDY1LDExMiwtMjQsLTExNCwxMyw3LDYxLDE3LDQ2LDM2LC00MA=="
+        ).split(',').map(e => parseInt(e)))
+
+        async function deriveKey(userInput, salt) {
+            const encoder = new TextEncoder();
+            const passwordBuffer = encoder.encode(userInput);
+            const saltBuffer = encoder.encode(salt);
+            const baseKey = await window.crypto.subtle.importKey("raw", passwordBuffer, "PBKDF2", false, ["deriveKey"]);
+            return await window.crypto.subtle.deriveKey(
+                { name: "PBKDF2", salt: saltBuffer, iterations: 1000, hash: "SHA-256" },
+                baseKey, { name: "AES-GCM", length: 256 }, true, ["decrypt"]
+            );
+        }
+
+        async function unlockData(userInput, encryptedData) {
+            try {
+                const key = await deriveKey(userInput, SALT);
+                const decryptedBuffer = await window.crypto.subtle.decrypt({ name: "AES-GCM", iv: IV }, key, encryptedData);
+                return JSON.parse(new TextDecoder().decode(decryptedBuffer));
+            } catch (err) { throw new Error("Invalid password"); }
+        }
+
+        async function initializePage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tokenParam = urlParams.get('pass');
+            if (tokenParam) {
+                try {
+                    const data = await unlockData(tokenParam.trim(), ENCRYPTED_DATA);
+                    showMainContent(data);
+                } catch (e) { showError('Nieprawidłowa data'); }
+            }
+        }
+
+        function showMainContent(data) {
+            document.getElementById('passwordProtected').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            for (const [key, value] of Object.entries(data)) {
+                const e = document.getElementById(key);
+                if (e) {
+                    let content = value;
+                    if (key.toLowerCase().includes('date')) {
+                        try {
+                            content = new Date(value).toLocaleDateString();
+                        } catch (e) {
+                            console.log(e)
+                        }
+                    }
+                    e.textContent = content;
+                }
+            }
+        }
+
+        function showError(msg) {
+            const err = document.getElementById('errorMessage');
+            err.textContent = msg;
+            err.style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+</body>
+
+</html>
