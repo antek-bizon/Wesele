@@ -2,120 +2,152 @@
 <html lang="pl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aleksandra & Antoni - Zaproszenie</title>
-    <link rel="stylesheet" href="./style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Aleksandra & Antoni - Zaproszenie</title>
+	<link rel="stylesheet" href="./style.css">
+	<script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
 </head>
 
 <body>
-    <div class="flower-decor top-right"></div>
-    <div class="flower-decor bottom-left"></div>
+	<div class="flower-decor top-left"></div>
+	<div class="flower-decor top-right"></div>
+	<div class="flower-decor bottom-left"></div>
+	<div class="flower-decor bottom-right"></div>
 
-    <div id="passwordProtected" class="password-protected">
-        <form class="password-form" action="./">
-            <h2>Weryfikacja</h2>
-            <p>Prosimy podać datę ślubu:</p>
-            <input type="date" required class="date-input" name="pass">
-            <button type="submit" class="submit-btn">Wejdź</button>
-            <div id="errorMessage" class="error-message" style="display: none;"></div>
-        </form>
-    </div>
-    <main id="mainContent" class="main-content">
-        <p><q>Tak więc trwają wiara, nadzieja, miłość – te trzy: z nich zaś największa jest miłość.</q> – (1
-            Kor 13,13)</p>
+	<div id="passwordProtected" class="password-protected">
+		<form class="password-form" action="./">
+			<h2>Weryfikacja</h2>
+			<p>Prosimy podać datę ślubu:</p>
+			<input type="date" required class="date-input" name="pass">
+			<button type="submit" class="submit-btn">Wejdź</button>
+			<div id="errorMessage" class="error-message" style="display: none;"></div>
+		</form>
+	</div>
+	<main>
+		<p><q>Tak więc trwają wiara, nadzieja, miłość – te trzy:<br>z nich zaś największa jest miłość.</q>
+			– (<span class="num">1</span>
+			Kor <span class="num">13,13</span>)</p>
+		<hr>
+		<h1>Aleksandra Dziedzic<br>i<br>Antoni Bizoń</h1>
+		<p>wraz z rodzicami</p>
+		<p>mają zaszczyt zaprosić na uroczystość zaślubin która odbędzie się</p>
+		<p id="ceremonyDate"></p>
+		<p>o godzinie <span id="ceremonyTime"></span></p>
+		<p>w <a href="#map">kościele <span id="churchLocation"></span></a>.</p>
+		<div class="center">
+			<add-to-calendar-button id="addToCalandar" name="Ślub i Wesele: Aleksandra & Antoni"
+				description="Uroczystość zaślub oraz przyjęcie weselne." timeZone="Europe/Warsaw"
+				options="'Google','Apple','Outlook.com','iCal'" language="pl" label="Dodaj do kalendarza"
+				hideBranding="true"></add-to-calendar-button>
+		</div>
+		<hr>
+		<p>
+			Po ceremonii zapraszamy na przyjęcie weselne, <br>
+			które odbędzie się w <a href="#map" id="receptionLocation">.</a>
+		</p>
+		<hr>
+		<p class="bold">
+			Uprzejmie prosimy o potwierdzenie przybycia do dnia <span id="confirmation" class="bold"></span>.
+		</p>
 
-        <h1>Aleksandra & Antoni</h1>
+		<table>
+			<tr>
+				<th>Aleksandra</th>
+				<td><a class="num" id="contact1_tel"></a></td>
+			</tr>
+			<tr>
+				<th>Antoni</th>
+				<td><a class="num" id="contact2_tel"></a></td>
+			</tr>
+		</table>
 
-        <p class="invitation-text">Mają zaszczyt zaprosić na uroczystość zaślubin,<br> która odbędzie się</p>
-        <p id="ceremonyDate"></p>
-        <p>o godzinie <span id="ceremonyTime"></span></p>
-        <p>w kościele <span id="churchLocation"></span></p>
-        <p>
-            Po ceremonii zapraszamy na przyjęcie weselne, <br>
-            które odbędzie się w <span id="receptionLocation"></span>
-        </p>
+		<hr>
 
-        <p style="margin-top: 60px; font-size: 0.9rem;">
-            Uprzejmie prosimy o potwierdzenie przybycia do dnia <span id="confirmDate">...</span>
-        </p>
+		<iframe id="map"
+			src="https://www.google.com/maps/d/u/0/embed?mid=1Z1uEiF396mKjA35T7_UzcbSXNedMif4&ehbc=2E312F&noprof=1"></iframe>
+	</main>
 
-        <div class="contact-grid">
-            <div>
-                <div class="contact-label">Aleksandra</div>
-                <div id="contact1">...</div>
-            </div>
-            <div>
-                <div class="contact-label">Antoni</div>
-                <div id="contact2">...</div>
-            </div>
-        </div>
-    </main>
+	<script>
+		const SALT = 'dsfnaosdnfoansodfo';
+		const IV = new Int8Array([12, 23, 85, 49, 20, 1, 39, 52, 12, 32, 95, 100]);
+		const ENCRYPTED_DATA = new Int8Array(atob(
+			"LTQ3LDMxLC03MiwtNjIsLTQ3LC0zOCwxMCw5Myw1MCwxMjcsLTEwNiwtOTcsNzIsNTUsLTEwMyw3MSwxMjYsLTE0LC0xMDEsLTg3LDc0LC03MCwtMTIwLDU5LDEwMSwtMTAzLC05MywtMjEsMSwtMjIsLTU1LC02NCwtMzcsLTEyNiwtNDAsNzUsLTEyNSwtMjYsLTU5LDk2LDQ4LDQ3LDE4LC03OCw2MSwtNjIsOCw0NSw4OSw4MSwtNSw3NSwtODQsMjMsOTUsLTEsLTI3LC0xMDUsLTg4LDEzLC0yNiwtNzEsLTMzLDEwMyw3OCwtNzIsMTEwLDUsMTIzLC0xNSwtNjEsMTE5LC00MiwtNTksLTEyMywtMzYsNzYsLTEwNSwtOCw1NSwtNjUsLTEyNCwtNDEsODAsODAsNTYsLTY4LC0yMiwtNDcsLTEwMSwtMzIsLTI5LDc3LDQ0LDUyLC03OCw0OSwtMTA3LC0xMTksLTc1LC00NSwtOTYsLTEwMSw1NywyMiw1Myw5NCwtNTYsMTI2LC00NiwtMjUsMzAsLTUzLDM4LDE4LDQzLC02LDgwLDEyNCwtNjcsLTExMSwtMTI2LC01NywtNjksNzYsMTI2LC04LDEyNSwzLDUxLDU4LDEwOSwtMTA3LDIxLDQ0LDU1LC0xMjQsNTksLTExMiwxMjEsODgsNTYsMTI3LDg2LC0xMjIsLTM0LC02NCwtMTcsLTEyMCwxMDQsNzIsLTEwMCwtMTAyLC0zNywxMDAsNiw3NSwxMTQsLTU3LDQzLC02OSwtODIsLTg4LC0zLDEyNCw3NSwtNzksMTEsLTExOCwxMTksLTgwLDg4LDQ0LC02NCwyNCw2NSwtNjgsLTUwLC02NiwtNyw5NywtOSwyNSwyMCwtMjEsLTczLDk2LC04NCwtNzIsLTEyMCwtNjEsLTExMSwxMDMsMzksMjMsLTEwNCwxMjcsLTg3LDUxLDUxLDg4LC03Myw0NSw0Niw3MiwxMDIsLTQxLC0yLC01LDksMTExLC00NSwtOTMsLTg1LC0yNCwtNjgsNjgsMzksLTgwLC00MCwtNDksMzcsLTEwMCwtOTIsLTEwOCwzOSw4Nyw2NCw4MCwxOSwxLDY1LC04NywxMDQsOTcsNDQsLTc0LC0xOCwzMCwtNjcsNTMsLTYsMTMsLTYzLC0xMTMsLTE2LC0xMTMsLTYzLC05OCw4OSwtODQsODIsLTYwLC0yMSwxMDcsLTcsLTQ5LDksMTUsLTEwNywtNzgsMTI0LC0yOSwtMzAsLTIwLDg0LDM0LDMyLDYxLDM4LC01MiwtMiwtOCwxMSwyOCwyNSwtMTAzLC0xMTAsODIsODQsLTM0LDY3LDM4LDEwMiwtNzYsNzMsNA=="
+		).split(',').map(e => parseInt(e)));
 
-    <script>
-        const SALT = 'dsfnaosdnfoansodfo'
-        const IV = new Int8Array([12, 23, 85, 49, 20, 1, 39, 52, 12, 32, 95, 100])
-        const ENCRYPTED_DATA = new Int8Array(atob(
-            "LTQ3LDMxLC03MiwtNjIsLTQ3LC0zOCwxMCw5Myw1MCwxMjcsLTEwNiwtOTcsNzIsNTUsLTEwMyw3MSwxMjYsLTE0LC0xMDEsLTg3LDc0LC03MCwtMTIwLDU5LDEwMSwtMTAzLC05MywtMjEsMSwtMjIsLTU1LC02NCwtMzcsLTEyNiwtNDAsNzUsLTEyNSwtMjYsLTU5LDk2LDQ4LDQ3LDE4LC03OCw2MSwtNjIsOCw0NSw4OSw4MSwtNSw3NSwtODQsMjMsOTUsLTEsLTI3LC0xMDUsLTg4LDEzLC0yNiwtNzEsLTMzLDEwMyw3OCwtNzIsMTEwLDUsMTIzLC0xNSwtNjEsMTE5LC00MiwtNTksLTEyMywtMzYsNzYsLTEwNSwtOCw1NSwtNjUsLTEyNCwtNDEsODAsODAsNTYsLTY4LC0yMiwtNDcsLTEwMSwtMzIsLTI5LDc3LDQ0LDUyLC03OCw0OSwtMTA3LC0xMTksLTc1LC00NSwtOTYsLTEwMSw1OSw3Nyw1NSwxMTUsLTU2LDEwMywtNTUsLTE0LDI4LDEyMiwtMTA5LDgzLDEwMCwtNiw3NSwxMDMsLTIwLC01MiwtMzMsLTExOCwtMjEsMjQsNjMsLTIxLDE0LDg1LDUzLDU3LDMzLC0zNyw4NiwxMjAsMTIyLC0xMjQsNDMsLTEwMyw5OCw5NCw1NCwxMjMsNzcsLTEwNCwtNTYsLTEwMSwtNzUsLTQ4LDYyLDUsLTM1LC0xMTUsLTEyMiw4NSwyMCw3MSwxMDgsLTEyMCw4NSwtOCwtMTksLTEyLC0xOCwxMjcsOTEsLTczLDMsLTExNSwxMTksLTY1LDY4LDU2LC0xMTQsNjgsMzEsLTgsLTExNywtMTgsLTksMTAxLC0xNSwyMSwyMiwtMjIsLTUsMzUsLTU0LC0yMiwtNTEsLTEyMiwtMiw2MCwxMTEsNjgsLTEyMCwxMjcsLTgxLDQ0LDUzLDc3LC03NCw2MiwxMjMsMTUsNTYsLTExMiwtMTYsLTE1LDIxLDExNSwtNiwtODMsLTc5LC0xMiwtNTQsMjMsMTA0LC0yNSwtNTQsLTU3LDQ5LC0xMjgsLTk2LC0xMDMsNTcsODYsODQsMTUsLTQsLTEsLTE3LDcyLDU4LDY1LDExMiwtMjQsLTExNCwxMyw3LDYxLDE3LDQ2LDM2LC00MA=="
-        ).split(',').map(e => parseInt(e)))
+		async function deriveKey(userInput, salt) {
+			const encoder = new TextEncoder();
+			const passwordBuffer = encoder.encode(userInput);
+			const saltBuffer = encoder.encode(salt);
+			const baseKey = await window.crypto.subtle.importKey("raw", passwordBuffer, "PBKDF2", false, ["deriveKey"]);
+			return await window.crypto.subtle.deriveKey(
+				{name: "PBKDF2", salt: saltBuffer, iterations: 1000, hash: "SHA-256"},
+				baseKey, {name: "AES-GCM", length: 256}, true, ["decrypt"]
+			);
+		}
 
-        async function deriveKey(userInput, salt) {
-            const encoder = new TextEncoder();
-            const passwordBuffer = encoder.encode(userInput);
-            const saltBuffer = encoder.encode(salt);
-            const baseKey = await window.crypto.subtle.importKey("raw", passwordBuffer, "PBKDF2", false, ["deriveKey"]);
-            return await window.crypto.subtle.deriveKey(
-                { name: "PBKDF2", salt: saltBuffer, iterations: 1000, hash: "SHA-256" },
-                baseKey, { name: "AES-GCM", length: 256 }, true, ["decrypt"]
-            );
-        }
+		async function unlockData(userInput, encryptedData) {
+			try {
+				const key = await deriveKey(userInput, SALT);
+				const decryptedBuffer = await window.crypto.subtle.decrypt({name: "AES-GCM", iv: IV}, key, encryptedData);
+				return JSON.parse(new TextDecoder().decode(decryptedBuffer));
+			} catch (err) {throw new Error("Invalid password");}
+		}
 
-        async function unlockData(userInput, encryptedData) {
-            try {
-                const key = await deriveKey(userInput, SALT);
-                const decryptedBuffer = await window.crypto.subtle.decrypt({ name: "AES-GCM", iv: IV }, key, encryptedData);
-                return JSON.parse(new TextDecoder().decode(decryptedBuffer));
-            } catch (err) { throw new Error("Invalid password"); }
-        }
+		async function initializePage() {
+			const urlParams = new URLSearchParams(window.location.search);
+			const tokenParam = urlParams.get('pass');
+			if (tokenParam) {
+				try {
+					const data = await unlockData(tokenParam.trim(), ENCRYPTED_DATA);
+					console.log(data)
+					showMainContent(data);
+				} catch (e) {
+					console.error('Wystąpił błąd!', e);
+				}
+			}
+		}
 
-        async function initializePage() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const tokenParam = urlParams.get('pass');
-            if (tokenParam) {
-                try {
-                    const data = await unlockData(tokenParam.trim(), ENCRYPTED_DATA);
-                    showMainContent(data);
-                } catch (e) { showError('Nieprawidłowa data'); }
-            }
-        }
+		function setUpCalandarButton(data) {
+			const button = document.getElementById('addToCalandar');
+			if (button) {
+				button.setAttribute('startDate', data.ceremonyDate);
+				button.setAttribute('startTime', data.ceremonyTime);
+				const nextDay = new Date(data.ceremonyDate);
+				nextDay.setDate(nextDay.getDate() + 1);
+				button.setAttribute('endDate', nextDay.toISOString().split('T')[0]);
+				button.setAttribute('endTime', '23:02');
+			}
+		}
 
-        function showMainContent(data) {
-            document.getElementById('passwordProtected').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-            for (const [key, value] of Object.entries(data)) {
-                const e = document.getElementById(key);
-                if (e) {
-                    let content = value;
-                    if (key.toLowerCase().includes('date')) {
-                        try {
-                            content = new Date(value).toLocaleDateString();
-                        } catch (e) {
-                            console.log(e)
-                        }
-                    }
-                    e.textContent = content;
-                }
-            }
-        }
+		function showMainContent(data) {
+			document.getElementById('passwordProtected').style.display = 'none';
+			document.querySelector('main').style.display = 'block';
 
-        function showError(msg) {
-            const err = document.getElementById('errorMessage');
-            err.textContent = msg;
-            err.style.display = 'block';
-        }
+			for (const [key, value] of Object.entries(data)) {
+				try {
+					const e = document.getElementById(key);
+					if (e) {
+						let content = value;
+						const lKey = key.toLowerCase();
+						if (lKey.includes('date')) {
+							const date = new Date(value).toISOString().split('T')[0].split('-');
+							date.reverse();
+							content = date.join(' | ');
+						} else if (lKey.includes('contact') && lKey.includes('_tel')) {
+							content = content.replace(/(\d{3})(\d{3})(\d{3})/, '$1-$2-$3');
+						}
+						e.textContent = content;
+					}
+				} catch (err) {
+					console.error(err);
+				}
+			}
+			setUpCalandarButton(data);
+		}
 
-        document.addEventListener('DOMContentLoaded', initializePage);
-    </script>
+		document.addEventListener('DOMContentLoaded', initializePage);
+	</script>
 </body>
 
 </html>
