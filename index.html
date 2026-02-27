@@ -30,11 +30,11 @@
 			Kor <span class="num">13,13</span>)</p>
 		<hr>
 		<h1>Aleksandra Dziedzic<br>i<br>Antoni Bizoń</h1>
-		<p>wraz z rodzicami</p>
-		<p>mają zaszczyt zaprosić na uroczystość zaślubin która odbędzie się</p>
+		<p>wraz z rodzicami<br>mają zaszczyt zaprosić na uroczystość zaślubin<br>która odbędzie się</p>
 		<p id="ceremonyDate"></p>
 		<p>o godzinie <span id="ceremonyTime"></span></p>
 		<p>w <a href="#map">kościele <span id="churchLocation"></span></a>.</p>
+		<br>
 		<div class="center">
 			<add-to-calendar-button id="addToCalandar" name="Ślub i Wesele: Aleksandra & Antoni"
 				description="Uroczystość zaślub oraz przyjęcie weselne." timeZone="Europe/Warsaw"
@@ -43,12 +43,12 @@
 		</div>
 		<hr>
 		<p>
-			Po ceremonii zapraszamy na przyjęcie weselne, <br>
-			które odbędzie się w <a href="#map" id="receptionLocation">.</a>
+			Po ceremonii zapraszamy na przyjęcie weselne,<br>
+			które odbędzie się w <a href="#map" id="receptionLocation"></a>.
 		</p>
 		<hr>
 		<p class="bold">
-			Uprzejmie prosimy o potwierdzenie przybycia do dnia <span id="confirmation" class="bold"></span>.
+			Uprzejmie prosimy o potwierdzenie przybycia<br>do dnia <span id="confirmation" class="bold"></span>.
 		</p>
 
 		<table>
@@ -134,8 +134,11 @@
 							const date = new Date(value).toISOString().split('T')[0].split('-');
 							date.reverse();
 							content = date.join(' | ');
-						} else if (lKey.includes('contact') && lKey.includes('_tel')) {
-							content = content.replace(/(\d{3})(\d{3})(\d{3})/, '$1-$2-$3');
+						} else if (lKey.includes('contact')) {
+							if (lKey.includes('_tel')) {
+								e.href = `tel:+48${content}`
+								content = content.replace(/(\d{3})(\d{3})(\d{3})/, '$1-$2-$3');
+							}
 						}
 						e.textContent = content;
 					}

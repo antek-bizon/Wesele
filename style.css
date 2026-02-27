@@ -8,14 +8,18 @@
   font-weight: 400;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Cormorant Garamond', serif;
   background-color: #f9f9f9;
-  line-height: 1.8;
+  line-height: 1.6;
   min-height: 100vh;
-  font-size: 16pt;
+  font-size: clamp(1rem, 4vw, 1.2rem);
   color: #6b3d3d;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
@@ -27,36 +31,36 @@ q {
 
 h1 {
   font-family: 'Parisienne', cursive;
-  font-size: 4rem;
-  margin-bottom: 40px;
+  font-size: clamp(2.5rem, 8vw, 3.5rem);
+  margin-bottom: 1.5rem;
   line-height: 1em;
   text-transform: none;
 }
 
 h2 {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   margin-bottom: 20px;
   letter-spacing: 2px;
 }
 
 main {
   display: none;
+  min-height: 100vh;
   max-width: 800px;
   margin: 0 auto;
-  padding: 3em 4em 5em;
+  padding: 2rem 3.5rem 5rem;
   text-align: center;
-  background: linear-gradient(90deg, #ffffff00, #eee 10%, #eee 90%, #ffffff00);
-  min-height: 100vh;
+  background: linear-gradient(90deg, transparent, #eeeeeecc 15%, #eeeeeecc 85%, transparent);
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.02);
 }
 
 a {
-  text-decoration: unset;
+  /* text-decoration: unset; */
   color: unset;
 }
 
 hr {
-  margin: 2em;
+  margin: 2rem;
   border-width: 0;
   height: 1px;
   background: radial-gradient(circle, #6b3d3d, transparent);
@@ -70,7 +74,7 @@ table {
 td,
 th {
   width: 50%;
-  padding: 0 1rem;
+  padding: 0 0.7rem;
 }
 
 td {
@@ -83,7 +87,8 @@ th {
 
 .flower-decor {
   position: fixed;
-  width: 200px;
+  max-width: 200px;
+  width: 30vw;
   aspect-ratio: 880/1070;
   background-image: url('./f2.png');
   background-size: contain;
@@ -144,12 +149,8 @@ th {
 }
 
 #ceremonyDate {
-  font-size: 2.5rem;
+  font-size: clamp(1.7rem, 6vw, 2rem);
   margin: 0.5em 0;
-}
-
-p:has(#churchLocation) {
-  padding: 0 1em 10px 10px;
 }
 
 .center {
@@ -176,5 +177,8 @@ p:has(#churchLocation) {
 
 #map {
   width: 100%;
-  aspect-ratio: 3/2;
+  aspect-ratio: 16/9;
+  min-height: 15rem;
+  border: 0;
+  border-radius: 8px;
 }
