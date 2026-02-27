@@ -11,13 +11,12 @@
 	<link rel="icon" type="image/x-icon" href="./favicon_io/favicon.ico">
 	<link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
 	<link rel="manifest" href="./favicon_io/site.webmanifest">
 	<meta name="theme-color" content="#ffffff">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link
-		href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Parisienne&display=swap"
+		href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Cormorant+Garamond:ital@0;1&family=Parisienne&display=swap"
 		rel="stylesheet">
 	<link rel="stylesheet" href="./style.css">
 	<script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
@@ -114,7 +113,6 @@
 			if (tokenParam) {
 				try {
 					const data = await unlockData(tokenParam.trim(), ENCRYPTED_DATA);
-					console.log(data)
 					showMainContent(data);
 				} catch (e) {
 					console.error('Wystąpił błąd!', e);
