@@ -1,0 +1,262 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: 400;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Cinzel', serif;
+  background-color: #f9f9f9;
+  line-height: 1.6;
+  min-height: 100vh;
+  font-size: clamp(0.75rem, 2vw, 1.1rem);
+  color: #6b3d3d;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+q {
+  font-style: italic;
+  margin-bottom: 80px;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-family: 'Parisienne', cursive;
+  font-size: clamp(2rem, 8vw, 3rem);
+  margin-bottom: 1.5rem;
+  line-height: 1.1em;
+  text-transform: none;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main {
+  animation: fadeIn 1.5s ease;
+  display: none;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem 4rem;
+  text-align: center;
+  background: linear-gradient(90deg, transparent, #eeeeeecc 15%, #eeeeeecc 85%, transparent);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.02);
+}
+
+@media (min-width: 768px) {
+  main {
+    padding: 3rem 3.5rem 5rem;
+  }
+}
+
+a {
+  color: unset;
+}
+
+hr {
+  margin: 2em;
+  border-width: 0;
+  height: 1px;
+  background: radial-gradient(circle, #6b3d3d, transparent);
+}
+
+table {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+td,
+th {
+  width: 50%;
+  padding: 0 0.7rem;
+}
+
+td {
+  text-align: left;
+}
+
+th {
+  text-align: right;
+}
+
+.flower-decor {
+  position: fixed;
+  max-width: 250px;
+  width: 20vw;
+  aspect-ratio: 880/1070;
+  background-image: url('./f.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes slideInTopLeft {
+  from {
+    opacity: 0;
+    transform: translate(-50px, -50px) scaleX(-1);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scaleX(-1);
+  }
+}
+
+@keyframes slideInTopRight {
+  from {
+    opacity: 0;
+    transform: translate(50px, -50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes slideInBottomLeft {
+  from {
+    opacity: 0;
+    transform: translate(-50px, 50px) rotate(180deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0) rotate(180deg);
+  }
+}
+
+@keyframes slideInBottomRight {
+  from {
+    opacity: 0;
+    transform: translate(50px, 50px) scaleY(-1);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scaleY(-1);
+  }
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+  transform: scaleX(-1);
+  animation: slideInTopLeft 1.5s ease-out forwards;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+  animation: slideInTopRight 1.5s ease-out forwards;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+  transform: rotate(180deg);
+  animation: slideInBottomLeft 1.5s ease-out forwards;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+  transform: scaleY(-1);
+  animation: slideInBottomRight 1.5s ease-out forwards;
+}
+
+.password-protected {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-form {
+  text-align: center;
+  padding: 2rem;
+  margin-bottom: 4rem;
+  max-width: 400px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+#ceremonyDate {
+  font-size: clamp(1.1rem, 4vw, 2rem);
+  margin: 0.4em 0;
+}
+
+.center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.date-input {
+  padding: 0.75rem;
+  color: #6b3d3d;
+  border: 1px solid #ddd;
+  margin: 20px 0;
+  font-family: 'Inter', sans-serif;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(107, 61, 61, 0.1);
+}
+
+button {
+  background: #6b3d3d;
+  color: whitesmoke;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  letter-spacing: 2px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(107, 61, 61, 0.2);
+  transition: padding 0.1s, background 0.4s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background: #8b5d5d;
+  padding: 0.85rem 2rem;
+  box-shadow: 0 6px 20px rgba(107, 61, 61, 0.3);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+#map {
+  width: 100%;
+  aspect-ratio: 16/9;
+  min-height: 15rem;
+  border: 0;
+  border-radius: 8px;
+}
+
+#errorMessage {
+  display: none;
+  color: red;
+}
