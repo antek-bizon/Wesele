@@ -13,7 +13,6 @@ body {
   font-family: 'Cinzel', serif;
   background-color: #fcfcfc;
   line-height: 1.6;
-  min-height: 100vh;
   font-size: clamp(0.75rem, 2vw, 1.1rem);
   color: #6b3d3d;
   text-shadow: 0 1px 2px #00000026;
@@ -114,41 +113,42 @@ th {
   background-repeat: no-repeat;
   z-index: -1;
   pointer-events: none;
+  will-change: transfrom, opacity;
 }
 
 @keyframes slideInTopLeft {
   from {
     opacity: 0;
-    transform: translate(-50px, -50px) scaleX(-1);
+    transform: translate3d(-50px, -50px, 0) scaleX(-1);
   }
 
   to {
     opacity: 1;
-    transform: translate(0, 0) scaleX(-1);
+    transform: translate3d(0, 0, 0) scaleX(-1);
   }
 }
 
 @keyframes slideInTopRight {
   from {
     opacity: 0;
-    transform: translate(50px, -50px);
+    transform: translate3d(50px, -50px, 0);
   }
 
   to {
     opacity: 1;
-    transform: translate(0, 0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes slideInBottomLeft {
   from {
     opacity: 0;
-    transform: translate(-50px, 50px) rotate(180deg);
+    transform: translate3d(-50px, 50px, 0) rotate(180deg);
   }
 
   to {
     opacity: 1;
-    transform: translate(0, 0) rotate(180deg);
+    transform: translate3d(0, 0, 0) rotate(180deg);
   }
 }
 
