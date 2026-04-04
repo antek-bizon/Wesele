@@ -114,6 +114,8 @@ th {
   z-index: -1;
   pointer-events: none;
   will-change: transfrom, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 @keyframes slideInTopLeft {
