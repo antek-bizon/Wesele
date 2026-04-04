@@ -16,7 +16,7 @@ body {
   min-height: 100vh;
   font-size: clamp(0.75rem, 2vw, 1.1rem);
   color: #6b3d3d;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  text-shadow: 0 1px 2px #00000026;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -65,7 +65,7 @@ main {
   padding: 2rem 2.5rem 4rem;
   text-align: center;
   background: linear-gradient(90deg, transparent, #eeeeeecc 15%, #eeeeeecc 85%, transparent);
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 0 50px #00000005;
 }
 
 @media (min-width: 768px) {
@@ -206,12 +206,12 @@ th {
 }
 
 .bold {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 #ceremonyDate {
   font-size: clamp(1.1rem, 4vw, 2rem);
-  margin: 0.4em 0;
+  margin: .4em 0;
 }
 
 .center {
@@ -221,39 +221,38 @@ th {
 }
 
 .date-input {
-  padding: 0.75rem;
+  padding: .75rem;
   color: #6b3d3d;
   border: 1px solid #ddd;
   margin: 20px 0;
   font-family: 'Inter', sans-serif;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(107, 61, 61, 0.1);
+  box-shadow: 0 4px 15px #6b3d3d1a;
 }
 
 button {
   background: #6b3d3d;
-  color: whitesmoke;
+  color: #f5f5f5;
   padding: 0.75rem 2rem;
   cursor: pointer;
   letter-spacing: 2px;
   border: 0;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(107, 61, 61, 0.2);
-  transition: background 0.4s ease, transform 0.1s ease;
+  box-shadow: 0 4px 15px #6b3d3d33;
+  transition: background .4s ease, transform .1s ease;
   font-family: 'Cinzel', serif;
   font-weight: 600;
   border-radius: 500px;
 }
 
 add-to-calendar-button::part(atcb-button) {
-  transition: 0.4s all;
+  transition: .4s all;
 }
 
 button:hover {
-  background: whitesmoke;
+  background: #f5f5f5;
   color: #6b3d3d;
   transform: scale(1.05);
-  box-shadow: 0 3px 20px rgba(107, 61, 61, 0.4);
+  box-shadow: 0 3px 20px #6b3d3d66;
 }
 
 button:active {
@@ -271,8 +270,4 @@ button:active {
 #errorMessage {
   display: none;
   color: red;
-}
-
-.nb {
-  white-space: nowrap;
 }
