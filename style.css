@@ -21,6 +21,10 @@ body {
   text-transform: uppercase;
 }
 
+p {
+  text-wrap: balance;
+}
+
 q {
   font-style: italic;
   margin-bottom: 80px;
@@ -235,13 +239,21 @@ button {
   border: 0;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(107, 61, 61, 0.2);
-  transition: padding 0.1s, background 0.4s ease, transform 0.1s ease;
+  transition: background 0.4s ease, transform 0.1s ease;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  border-radius: 500px;
+}
+
+add-to-calendar-button::part(atcb-button) {
+  transition: 0.4s all;
 }
 
 button:hover {
-  background: #8b5d5d;
-  padding: 0.85rem 2rem;
-  box-shadow: 0 6px 20px rgba(107, 61, 61, 0.3);
+  background: whitesmoke;
+  color: #6b3d3d;
+  transform: scale(1.05);
+  box-shadow: 0 3px 20px rgba(107, 61, 61, 0.4);
 }
 
 button:active {
@@ -259,4 +271,8 @@ button:active {
 #errorMessage {
   display: none;
   color: red;
+}
+
+.nb {
+  white-space: nowrap;
 }
